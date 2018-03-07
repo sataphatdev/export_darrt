@@ -104,12 +104,13 @@ if($_POST){
   	// file and folder for export
     // new file name
   	$filename = time().'.txt';
+    if(!is_dir('files')) { mkdir('files');}
     // path keep file export
   	$file = 'files/'.$filename;
   	// Open in write mode
   	$f = fopen($file, 'w');
   	// begin query
-    
+
   	$sql = "SELECT icd10 AS DISEASE,v.hn AS HN,IF(v.VN IS NULL,2,1) AS PATIENT_TYPE,p.pname AS TITLE,p.fname AS FNAME";
     $sql .= ",p.lname AS LNAME,v.sex AS SEX,v.age_y AS AGEY,p.nationality AS NATION,p.citizenship AS RACE";
     $sql .= ",p.occupation AS OCCUPAT,p.addrpart AS ADDRESS,concat(p.chwpart,p.amppart,p.tmbpart) AS ADDRCODE_PAT,p.moopart AS ADDRCODE_MOO";
